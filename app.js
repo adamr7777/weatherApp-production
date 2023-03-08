@@ -1,5 +1,5 @@
 
-import {getTime, getLatlong, getWeatherData, renderTodayWeather, updateInfo, checkDay, getRenderImg, refreshWeatherHandle} from './utils.js';
+import {getTime, getLatlong, getWeatherData, renderTodayWeather, updateInfo, checkDay, getRenderImg, refreshWeatherHandle, renderWeek} from './utils.js';
 
 
 
@@ -25,6 +25,9 @@ import {getTime, getLatlong, getWeatherData, renderTodayWeather, updateInfo, che
         if (event.target.id === 'btn-today') {
             document.getElementById('btn-today').disabled = true;
             document.getElementById('btn-week').disabled = false;
+            document.getElementById('big-div').innerHTML = `
+            <div class='main-cont' id='main-cont'></div>
+            <div class='img-cont' id='img-cont'></div>`;
             renderTodayWeather();
             getRenderImg();
             
@@ -38,8 +41,9 @@ import {getTime, getLatlong, getWeatherData, renderTodayWeather, updateInfo, che
             document.getElementById('btn-week').disabled = true;
             // isWeekActive = true;
             // console.log(isWeekActive);
-            document.getElementById('big-div').innerHTML = `
-            `;
+            document.getElementById('big-div').innerHTML = `            
+            `;                                                          /*perhaps delete */
+            renderWeek();
         }
 
       
@@ -97,13 +101,14 @@ import {getTime, getLatlong, getWeatherData, renderTodayWeather, updateInfo, che
 
 
 
-async function getWeatherForecast() {
-    const location = getLatlong();   /*add await */
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${location[0]}&lon=${location[1]}&appid=df933d2878900bdaa697768d49d7372e&units=metric`)
-    const data = await response.json();
-    console.log(data.list[3].dt_txt);
-}
 
 
 
-getWeatherForecast();
+
+
+
+
+
+
+
+// getWeatherForecast();

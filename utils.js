@@ -1,5 +1,5 @@
 
-export {getTime, getLatlong, getWeatherData, renderTodayWeather, updateInfo, checkDay, getRenderImg, refreshWeatherHandle};
+export {getTime, getLatlong, getWeatherData, renderTodayWeather, updateInfo, checkDay, getRenderImg, refreshWeatherHandle, getQuote, renderWeek};
 
 
 function getTime() {
@@ -19,17 +19,17 @@ function checkDay() {
     return hours >= 6 && hours < 12? 'morning': hours >= 12 && hours < 18? 'day': hours >= 18 && hours < 23? 'evening': 'night';
 }
 
-function getLatlong() {     /*add async  */
-    // const position = await new Promise((resolve, reject)=> {
-    //     navigator.geolocation.getCurrentPosition(resolve,reject)
-    // });
-    // return [position.coords.latitude, position.coords.longitude];       /*for now the location is fixed */
-    return [51.50722, -0.1275]
+async function getLatlong() {     
+    const position = await new Promise((resolve, reject)=> {                /*comment all out, remove async  */
+        navigator.geolocation.getCurrentPosition(resolve,reject)
+    });
+    return [position.coords.latitude, position.coords.longitude];       
+    // return [51.50722, -0.1275]                   /*for the safe version */
 }
 
 
 async function getWeatherData() {
-    const location = getLatlong();  /*add await */
+    const location = await getLatlong();  /*fro the safe version remove await */
    
     const response = await fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${location[0]}&lon=${location[1]}&units=metric`);
     const data = await response.json();         /*catch error */
@@ -117,4 +117,67 @@ async function updateInfo() {
     }, 900000) /*15min 900000 */
 } 
 
+
+async function getQuote() {
+    const response = await fetch(`https://apiquotes.com/wp-json/v3/random?authorisation=fluentform id=”3″`); 
+    const data = await response.json();
+    return data[0].quote;
+}
+
+async function getWeatherForecast() {
+    const location = await getLatlong();   /*for the safe version remove await */
+    const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${location[0]}&lon=${location[1]}&appid=df933d2878900bdaa697768d49d7372e&units=metric`)
+    const data = await response.json();
+    const htmlString = `
+    <div class='week-main-div' id='week-main-div'>
+        <div class='quote-div' id='quote-div'></div>
+        <div class='forecast-h-div' id='forecast-h-div'>
+        // 4 divs(each 3hours forecast) (time, icon, temp, humidity)
+        </div>
+        <div class='forecast-d-div' id='forecast-d-div'>
+        6 divs(each for a day) (monday, humidity, day/night icon, day/night temp)
+        </div>
+    </div>`
+    // const weatherArray4 = data.list.slice(0,4);
+    
+    // console.log(data.list[0].dt_txt);
+    // console.log(data.list[0].weather[0].icon);
+    // console.log(data.list[0].main.temp);
+    // console.log(data.list[0].main.humidity);
+    // console.log(data.list);
+    // data.list.forEach((item)=> console.log(item.dt_txt))
+    return data.list.slice(0,4)
+        .map((item)=> {
+            return `
+                <div>
+                    <h4>${item.dt_txt}</h4>
+                    <img src='http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png'/>
+                    <h4>${item.main.temp}</h4>
+                    <h4>${item.main.humidity}</h4>
+                </div>`
+        }).join('');
+}
+
+
+async function renderWeek() {
+    const quoteText = await getQuote();
+    // console.log(quoteText);
+    const weatherForecast = await getWeatherForecast();
+    document.getElementById('big-div')
+        .innerHTML = `
+        <div class='week-main-div' id='week-main-div'>
+            <div class='quote-div' id='quote-div'>
+                <p class='discription'>Here's a fortune cookie for today:</p>
+                <h4 class='quote'>${quoteText}</h4>
+            </div>
+            <div class='forecast-h-div' id='forecast-h-div'>
+                ${weatherForecast}
+            </div>
+        </div>`
+
+    
+    
+    
+
+}
 
