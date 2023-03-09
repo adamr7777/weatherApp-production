@@ -59,8 +59,6 @@ import {getTime, getLatlong, getWeatherData, renderTodayWeather, updateInfo, che
         updateInfo(); /*move to the event listener */
         renderTodayWeather();           /*for convenience, later delete*/
         getRenderImg();
-    
-
 })();
 
 

@@ -19,6 +19,8 @@ function checkDay() {
     return hours >= 6 && hours < 12? 'morning': hours >= 12 && hours < 18? 'day': hours >= 18 && hours < 23? 'evening': 'night';
 }
 
+
+
 async function getLatlong() {     
     const position = await new Promise((resolve, reject)=> {                /*comment all out, remove async  */
         navigator.geolocation.getCurrentPosition(resolve,reject)
@@ -26,6 +28,7 @@ async function getLatlong() {
     return [position.coords.latitude, position.coords.longitude];       
     // return [51.50722, -0.1275]                   /*for the safe version */
 }
+
 
 
 async function getWeatherData() {
@@ -115,6 +118,11 @@ async function updateInfo() {
     const updateImg = setInterval(()=>{
         getRenderImg();
     }, 900000) /*15min 900000 */
+
+    const updateForecast = setInterval(()=>{
+        renderWeek();
+    },3600000)      /*1h 3600000*/      /*perhaps set it to 0.5hs*/
+
 } 
 
 
@@ -124,45 +132,91 @@ async function getQuote() {
     return data[0].quote;
 }
 
-async function getWeatherForecast() {
+
+
+async function getWeatherForecastData() {
     const location = await getLatlong();   /*for the safe version remove await */
     const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${location[0]}&lon=${location[1]}&appid=df933d2878900bdaa697768d49d7372e&units=metric`)
     const data = await response.json();
-    const htmlString = `
-    <div class='week-main-div' id='week-main-div'>
-        <div class='quote-div' id='quote-div'></div>
-        <div class='forecast-h-div' id='forecast-h-div'>
-        // 4 divs(each 3hours forecast) (time, icon, temp, humidity)
-        </div>
-        <div class='forecast-d-div' id='forecast-d-div'>
-        6 divs(each for a day) (monday, humidity, day/night icon, day/night temp)
-        </div>
-    </div>`
-    // const weatherArray4 = data.list.slice(0,4);
+    // const nightForecast = data.list.filter((item)=> {
+    //     const time = item.dt_txt.slice(-8);
+    //     switch(time) {
+    //         case '00:00:00':
+    //             return
+    //     }
+          
+    // })
+    const nightForecast = data.list.filter((item)=> {
+        const time = item.dt_txt.slice(-8);
+        return time === '21:00:00';
+         
+          
+    })
+
+    const dayForecast = data.list.filter((item)=> {
+        const time = item.dt_txt.slice(-8);
+        return time === '12:00:00';
+    })
+
+    // const x = array.filter((num)=> {
+    //     if (num === 5) 
+    // })
     
-    // console.log(data.list[0].dt_txt);
-    // console.log(data.list[0].weather[0].icon);
-    // console.log(data.list[0].main.temp);
-    // console.log(data.list[0].main.humidity);
-    // console.log(data.list);
-    // data.list.forEach((item)=> console.log(item.dt_txt))
-    return data.list.slice(0,4)
-        .map((item)=> {
-            return `
-                <div>
-                    <h4>${item.dt_txt}</h4>
-                    <img src='http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png'/>
-                    <h4>${item.main.temp}</h4>
-                    <h4>${item.main.humidity}</h4>
-                </div>`
-        }).join('');
+    // const o = data.list.map((item)=> {
+    //     return item.dt_txt;
+    // })
+    
+    // console.log(o);
+    // console.log(`night forecast:`);
+    // console.log(nightForecast);
+    // console.log(`day forecast:`);
+    // console.log(dayForecast);
+    console.log(data.list[0]);
+
+    let fiveDaysForecastArray = [];
+    for(let night of nightForecast) {
+        for(let day of dayForecast) {
+            if (night.dt_txt.slice(0, 10) === day.dt_txt.slice(0, 10)) {
+                const dayIcon = `http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`;
+                const nightIcon = `http://openweathermap.org/img/wn/${night.weather[0].icon}@2x.png`
+                fiveDaysForecastArray.push({
+                    dayTemp: day.main.temp, 
+                    nightTemp: night.main.temp, 
+                    dayIcon: dayIcon, 
+                    nightIcon: nightIcon, 
+                    dayDate: day.dt_txt, 
+                    nightDate: night.dt_txt
+                });
+            }
+        }
+    }
+    
+    console.log(fiveDaysForecastArray);
+    return {every3Hour: data.list.slice(0,3), fiveDays: fiveDaysForecastArray};
 }
+
+
+
+async function getWeatherForecastHtml() {
+    const weatherForecastObject = await getWeatherForecastData();
+    console.log(weatherForecastObject);
+    return weatherForecastObject.every3Hour.map((item)=> {
+        return `
+            <div class='hourly-forecast-div'>
+                <h4>${item.dt_txt.slice(10, -3)}</h4>
+                <img src='http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png'/>
+                <h4>${Math.round(item.main.temp)}°</h4>
+                <h4>💧${item.main.humidity}%</h4>
+            </div>`
+    }).join('');
+}
+
 
 
 async function renderWeek() {
     const quoteText = await getQuote();
     // console.log(quoteText);
-    const weatherForecast = await getWeatherForecast();
+    const weatherForecastHtml = await getWeatherForecastHtml();
     document.getElementById('big-div')
         .innerHTML = `
         <div class='week-main-div' id='week-main-div'>
@@ -171,13 +225,8 @@ async function renderWeek() {
                 <h4 class='quote'>${quoteText}</h4>
             </div>
             <div class='forecast-h-div' id='forecast-h-div'>
-                ${weatherForecast}
+                ${weatherForecastHtml}
             </div>
         </div>`
-
-    
-    
-    
-
 }
 

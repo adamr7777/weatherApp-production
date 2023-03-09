@@ -1,6 +1,24 @@
-#for the private_version restore gps location
+#for the private_version restore gps location <!--completed-->
 #fix refresh circle
 #change scrimba api to regular
 #for all api calls add catch
 #put the author on the pic
-#slit weatherForecast function into getForecastData and getForecastHtml
+#split weatherForecast function into getForecastData and getForecastHtml <!--completed-->
+#change all data from lists to objects
+#get a better fortune cookie api
+#revrite the loop that appends fiveDaysForecastArray (in getWeatherForecastData() in utils.js) ??
+
+!!!! check the gap between 21:00 and 00:00
+
+
+
+<!-- const htmlString = `
+    <div class='week-main-div' id='week-main-div'>
+        <div class='quote-div' id='quote-div'></div>
+        <div class='forecast-h-div' id='forecast-h-div'>
+        // 4 divs(each 3hours forecast) (time, icon, temp, humidity)
+        </div>
+        <div class='forecast-d-div' id='forecast-d-div'>
+        6 divs(each for a day) (monday, humidity, day/night icon, day/night temp)
+        </div>
+    </div>` -->
