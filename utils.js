@@ -21,18 +21,18 @@ function checkDay() {
 
 
 
-async function getLatlong() {     
-    const position = await new Promise((resolve, reject)=> {                /*comment all out, remove async  */
-        navigator.geolocation.getCurrentPosition(resolve,reject)
-    });
-    return [position.coords.latitude, position.coords.longitude];       
-    // return [51.50722, -0.1275]                   /*for the safe version */
+/*async*/ function getLatlong() {     
+    // const position = await new Promise((resolve, reject)=> {                /*comment all out, remove async  */
+    //     navigator.geolocation.getCurrentPosition(resolve,reject)
+    // });
+    // return [position.coords.latitude, position.coords.longitude];       
+    return [51.50722, -0.1275]                   /*for the safe version */
 }
 
 
 
 async function getWeatherData() {
-    const location = await getLatlong();  /*fro the safe version remove await */
+    const location = /*await*/ getLatlong();  /*fro the safe version remove await */
    
     const response = await fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${location[0]}&lon=${location[1]}&units=metric`);
     const data = await response.json();         /*catch error */
