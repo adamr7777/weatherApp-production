@@ -7,6 +7,8 @@
 #change all data from lists to objects
 #get a better fortune cookie api
 #revrite the loop that appends fiveDaysForecastArray (in getWeatherForecastData() in utils.js) ??
+#remove functions that are not being used from imported list in app.js
+#check height in diff mobile phones(res des)
 
 !!!! check the gap between 21:00 and 00:00
 

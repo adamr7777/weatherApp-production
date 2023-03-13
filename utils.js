@@ -16,6 +16,7 @@ function getTime() {
 
 function checkDay() {
     const hours = getTime().hours;
+    // console.log(hours);
     return hours >= 6 && hours < 12? 'morning': hours >= 12 && hours < 18? 'day': hours >= 18 && hours < 23? 'evening': 'night';
 }
 
@@ -127,9 +128,17 @@ async function updateInfo() {
 
 
 async function getQuote() {
-    const response = await fetch(`https://apiquotes.com/wp-json/v3/random?authorisation=fluentform id=”3″`); 
-    const data = await response.json();
-    return data[0].quote;
+    // const now = new Date();
+    // const nowDate = parseInt(`this is date:${now.getMonth()}${now.getDate()}`)
+    // let array = [];
+    // const response = await fetch(`http://quotes.rest/qod.json?category=inspire&maxlength=25`); 
+    // const data = await response.json();
+    // // console.log(data.contents.quotes[0].quote);
+    // // array.push({quote: data[0].quote, date: nowDate})
+    // data[0].quote;
+    // console.log(array);
+    
+    return 'something meaningful';
 }
 
 
@@ -171,7 +180,7 @@ async function getWeatherForecastData() {
     // console.log(nightForecast);
     // console.log(`day forecast:`);
     // console.log(dayForecast);
-    console.log(data.list[0]);
+    // console.log(data.list[0]);
 
     let fiveDaysForecastArray = [];
     for(let night of nightForecast) {
@@ -191,7 +200,7 @@ async function getWeatherForecastData() {
         }
     }
     
-    console.log(fiveDaysForecastArray);
+    // console.log(fiveDaysForecastArray);
     return {every3Hour: data.list.slice(0,3), fiveDays: fiveDaysForecastArray};
 }
 
@@ -199,7 +208,7 @@ async function getWeatherForecastData() {
 
 async function getWeatherForecastHtml() {
     const weatherForecastObject = await getWeatherForecastData();
-    console.log(weatherForecastObject);
+    // console.log(weatherForecastObject);
     return weatherForecastObject.every3Hour.map((item)=> {
         return `
             <div class='hourly-forecast-div'>
