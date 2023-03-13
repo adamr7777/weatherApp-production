@@ -9,6 +9,7 @@
 #revrite the loop that appends fiveDaysForecastArray (in getWeatherForecastData() in utils.js) ??
 #remove functions that are not being used from imported list in app.js
 #check height in diff mobile phones(res des)
+#rename fiveDaysForecast to 4 days <!--completed-->
 
 !!!! check the gap between 21:00 and 00:00
 

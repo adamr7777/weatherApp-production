@@ -182,27 +182,40 @@ async function getWeatherForecastData() {
     // console.log(dayForecast);
     // console.log(data.list[0]);
 
-    let fiveDaysForecastArray = [];
+    let fourDaysForecastArray = [];
     for(let night of nightForecast) {
         for(let day of dayForecast) {
             if (night.dt_txt.slice(0, 10) === day.dt_txt.slice(0, 10)) {
                 const dayIcon = day.weather[0].icon;
                 const nightIcon = night.weather[0].icon;
-                fiveDaysForecastArray.push({
+                const now = new Date();
+                const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                const tomorrowDate = now.getDate() + 1;
+                // const tomorrowDay = weekDays[now.getDay() + 1];
+        
+               
+
+                fourDaysForecastArray.push({
                     dayTemp: day.main.temp, 
                     nightTemp: night.main.temp, 
                     dayIcon: dayIcon, 
                     nightIcon: nightIcon, 
                     dayDate: day.dt_txt, 
+                    weekDay:  
+                        tomorrowDate === parseInt(day.dt_txt.slice(8, 10))? 'Tomorrow': 
+                            tomorrowDate === parseInt(day.dt_txt.slice(8, 10)) - 1? weekDays[now.getDay() + 2]:
+                            tomorrowDate === parseInt(day.dt_txt.slice(8, 10)) - 2? weekDays[now.getDay() + 3]:
+                            weekDays[now.getDay() + 4], 
                     nightDate: night.dt_txt,
                     humidity: day.main.humidity
                 });
             }
         }
     }
-    
-    console.log(fiveDaysForecastArray );
-    return {every3Hour: data.list.slice(0,3), fiveDays: fiveDaysForecastArray};
+    // console.log(fourDaysForecastArray );
+    if (fourDaysForecastArray.length > 4) fourDaysForecastArray.pop();
+    // console.log(fourDaysForecastArray );
+    return {every3Hour: data.list.slice(0,3), fourDays: fourDaysForecastArray};
 }
 
 
@@ -224,11 +237,11 @@ async function getForecastHourlyHtml() {
 
 async function getForecastWeeklyHtml() {
     const weatherForeCastObject = await getWeatherForecastData();
-    console.log(weatherForeCastObject.fiveDays[0]);
-    return weatherForeCastObject.fiveDays.map((item)=> {
+    console.log(weatherForeCastObject.fourDays);                 /*important, check the date at all times */
+    return weatherForeCastObject.fourDays.map((item)=> {
         return `
             <div class='day-div'>
-                <h4>${item.dayDate.slice(0, 11)}</h4>
+                <h4>${item.weekDay}</h4>
                 <h4>💧${item.humidity}%</h4>
                 <div>
                     <img src='http://openweathermap.org/img/wn/${item.dayIcon}@2x.png'/>
