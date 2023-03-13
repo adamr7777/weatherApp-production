@@ -186,27 +186,28 @@ async function getWeatherForecastData() {
     for(let night of nightForecast) {
         for(let day of dayForecast) {
             if (night.dt_txt.slice(0, 10) === day.dt_txt.slice(0, 10)) {
-                const dayIcon = `http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`;
-                const nightIcon = `http://openweathermap.org/img/wn/${night.weather[0].icon}@2x.png`
+                const dayIcon = day.weather[0].icon;
+                const nightIcon = night.weather[0].icon;
                 fiveDaysForecastArray.push({
                     dayTemp: day.main.temp, 
                     nightTemp: night.main.temp, 
                     dayIcon: dayIcon, 
                     nightIcon: nightIcon, 
                     dayDate: day.dt_txt, 
-                    nightDate: night.dt_txt
+                    nightDate: night.dt_txt,
+                    humidity: day.main.humidity
                 });
             }
         }
     }
     
-    // console.log(fiveDaysForecastArray);
+    console.log(fiveDaysForecastArray );
     return {every3Hour: data.list.slice(0,3), fiveDays: fiveDaysForecastArray};
 }
 
 
 
-async function getWeatherForecastHtml() {
+async function getForecastHourlyHtml() {
     const weatherForecastObject = await getWeatherForecastData();
     // console.log(weatherForecastObject);
     return weatherForecastObject.every3Hour.map((item)=> {
@@ -221,11 +222,33 @@ async function getWeatherForecastHtml() {
 }
 
 
+async function getForecastWeeklyHtml() {
+    const weatherForeCastObject = await getWeatherForecastData();
+    console.log(weatherForeCastObject.fiveDays[0]);
+    return weatherForeCastObject.fiveDays.map((item)=> {
+        return `
+            <div class='day-div'>
+                <h4>${item.dayDate.slice(0, 11)}</h4>
+                <h4>💧${item.humidity}%</h4>
+                <div>
+                    <img src='http://openweathermap.org/img/wn/${item.dayIcon}@2x.png'/>
+                    <img src='http://openweathermap.org/img/wn/${item.nightIcon}@2x.png'/>
+                </div>
+                <div class='temp-div'>
+                    <h4>${Math.round(item.dayTemp)}° /</h4>
+                    <h4 class='night-temp'>${Math.round(item.nightTemp)}°</h4>
+                </div>
+            </div>`
+    }).join('');
+}
+
 
 async function renderWeek() {
     const quoteText = await getQuote();
     // console.log(quoteText);
-    const weatherForecastHtml = await getWeatherForecastHtml();
+    const forecastHourlyHtml = await getForecastHourlyHtml();
+    const forecastWeeklyHtml = await getForecastWeeklyHtml();
+    // const ForecastWeeklyHtml
     document.getElementById('big-div')
         .innerHTML = `
         <div class='week-main-div' id='week-main-div'>
@@ -234,7 +257,10 @@ async function renderWeek() {
                 <h4 class='quote'>${quoteText}</h4>
             </div>
             <div class='forecast-h-div' id='forecast-h-div'>
-                ${weatherForecastHtml}
+                ${forecastHourlyHtml}
+            </div>
+            <div class='forecast-weekly-div' id='forecast-weekly-div'>
+                ${forecastWeeklyHtml} 
             </div>
         </div>`
 }

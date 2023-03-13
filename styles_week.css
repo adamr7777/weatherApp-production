@@ -64,3 +64,33 @@
 .hourly-forecast-div h4 {
     text-align: center;
 }
+
+.forecast-weekly-div {
+    width: 400px; /*100px*/
+    height: 250px;
+    background-color: #7d51b9;
+    border-radius: 20px;
+    /* padding: 1em 2em; */
+}
+
+.day-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    
+}
+
+.day-div img {
+    width: 50px;
+}
+
+.temp-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.night-temp  {
+    margin-left: 0.3125em;
+}
