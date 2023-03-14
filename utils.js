@@ -72,10 +72,10 @@ async function getRenderImg() {
     const randomImg = `https://api.unsplash.com/photos/random/`         //until confirmed your acc, use scrimba api
     const key = '&client_id=XYMe11wvf2H6WeG3VzMj5QFbkZlplD0WCK2BCYPGIfI'
     const topic = `?query=${weatherData[3]},${timeOfDay},nature&orientation=portrait`
-    // const response = await fetch(randomImg + topic + key);
-    // const data = await response.json();
+    const response = await fetch(randomImg + topic + key);
+    const data = await response.json();
     
-    // document.getElementById('img-cont').innerHTML = `<img class='img' src='${data.urls.regular}'/>`
+    document.getElementById('img-cont').innerHTML = `<img class='img' src='${data.urls.regular}'/>`
 };
 
 
@@ -133,8 +133,8 @@ async function getQuote() {
     // let array = [];
     // const response = await fetch(`http://quotes.rest/qod.json?category=inspire&maxlength=25`); 
     // const data = await response.json();
-    // // console.log(data.contents.quotes[0].quote);
-    // // array.push({quote: data[0].quote, date: nowDate})
+    // console.log(data.contents.quotes[0].quote);
+    // array.push({quote: data[0].quote, date: nowDate})
     // data[0].quote;
     // console.log(array);
     
@@ -144,7 +144,7 @@ async function getQuote() {
 
 
 async function getWeatherForecastData() {
-    const location = await getLatlong();   /*for the safe version remove await */
+    const location = getLatlong();   /*for the safe version remove await */
     const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${location[0]}&lon=${location[1]}&appid=df933d2878900bdaa697768d49d7372e&units=metric`)
     const data = await response.json();
     // const nightForecast = data.list.filter((item)=> {
@@ -272,7 +272,7 @@ async function renderWeek() {
             <div class='forecast-h-div' id='forecast-h-div'>
                 ${forecastHourlyHtml}
             </div>
-            <div class='forecast-weekly-div' id='forecast-weekly-div'>
+            <div class='forecast-d-div' id='forecast-d-div'>
                 ${forecastWeeklyHtml} 
             </div>
         </div>`

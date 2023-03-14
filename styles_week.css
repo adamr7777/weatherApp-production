@@ -8,8 +8,8 @@
     justify-content: space-between; 
     align-items: center;
     /* min-height: 250px; */
-    margin-top: 4em;
-    min-height: 500px; /*adjust this*/
+    margin-top: 2em;
+    height: 700px /*adjust this*/
 }
 
 
@@ -65,7 +65,7 @@
     text-align: center;
 }
 
-.forecast-weekly-div {
+.forecast-d-div {
     width: 340px; 
     height: 250px;
     background-color: #7d51b9;

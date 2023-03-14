@@ -12,6 +12,7 @@
 #rename fiveDaysForecast to 4 days <!--completed-->
 
 !!!! check the gap between 21:00 and 00:00
+111 change the me units of all the divs to % to implement res des
 
 
 
@@ -24,4 +25,4 @@
         <div class='forecast-d-div' id='forecast-d-div'>
         6 divs(each for a day) (monday, humidity, day/night icon, day/night temp)
         </div>
-    </div>` -->
+    </div>` --> height 608px a bit smaller
