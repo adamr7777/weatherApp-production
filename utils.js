@@ -160,6 +160,8 @@ async function getQuote() {
     // array.push({quote: data[0].quote, date: nowDate})
     // data[0].quote;
     // console.log(array);
+   
+    // console.log(data);
     
     return 'something meaningful';
 }

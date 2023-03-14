@@ -64,7 +64,7 @@ nav {
     justify-content: space-between; 
     align-items: center;
     min-height: 250px;
-    margin-top: 1.5em;            /*originally- 3em*/
+    margin-top: 0;            /*originally- 3em*/
 }
 
 

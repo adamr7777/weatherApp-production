@@ -2,7 +2,6 @@
 #fix refresh circle
 #change scrimba api to regular
 #for all api calls add catch
-#put the author on the pic
 #split weatherForecast function into getForecastData and getForecastHtml <!--completed-->
 #change all data from lists to objects
 #get a better fortune cookie api
@@ -10,6 +9,14 @@
 #remove functions that are not being used from imported list in app.js
 #check height in diff mobile phones(res des)
 #rename fiveDaysForecast to 4 days <!--completed-->
+
+next:
+
+#put the author on the pic
+#get a better fortune cookie api
+
+
+
 
 !!!! check the gap between 21:00 and 00:00
 111 change the me units of all the divs to % to implement res des
