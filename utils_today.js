@@ -1,6 +1,6 @@
 
 export {getTime, getLatlong, getWeatherData, renderTodayWeather, updateInfo, checkDay, getRenderImg, 
-    refreshWeatherHandle, getQuote, renderWeek, refreshForecastHourlyHandle, refreshForecastWeeklyHandle};
+    refreshWeatherHandle, todayHandle};
 
 
 function getTime() {
@@ -77,6 +77,7 @@ async function getRenderImg() {
     // const data = await response.json();
     
     // document.getElementById('img-cont').innerHTML = `<img class='img' src='${data.urls.regular}'/>`
+    // document.getElementById('author-pic').textContent = `by ${data.user.first_name} ${data.user.last_name}`
 };
 
 
@@ -95,8 +96,15 @@ async function refreshWeatherHandle() {
 }
 
 
-
-
+function todayHandle() {
+    document.getElementById('btn-today').disabled = true;
+    document.getElementById('btn-week').disabled = false;
+    document.getElementById('big-div').innerHTML = `
+    <div class='main-cont' id='main-cont'></div>
+    <div class='img-cont' id='img-cont'></div>
+    <button class='refresh-btn' id='refresh-btn' >Refresh</button>
+    <p class='author-pic' id='author-pic'></p>`;
+}
 
 
 
@@ -129,5 +137,7 @@ async function updateInfo() {
     },3600000)      /*1h 3600000*/      /*perhaps set it to 0.5hs*/
 
 } 
+
+
 
 

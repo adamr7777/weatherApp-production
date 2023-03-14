@@ -183,6 +183,17 @@ footer {
     animation-iteration-count: 0.5;
   }
 
+  .author-pic {
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+    text-shadow: 1 1;
+    font-size: 13px;
+    margin: 0;
+    /* letter-spacing: 0.5px; */
+
+  }
+
 /* @media(min-width: 600px) {
     .big-div {
         display: flex;

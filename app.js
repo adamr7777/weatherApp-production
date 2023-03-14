@@ -1,7 +1,6 @@
 
-import {getTime, getLatlong, getWeatherData, renderTodayWeather, updateInfo, checkDay, 
-    getRenderImg, refreshWeatherHandle, renderWeek, refreshForecastHourlyHandle, 
-    refreshForecastWeeklyHandle} from './utils.js';
+import {renderTodayWeather, updateInfo, getRenderImg, refreshWeatherHandle, todayHandle} from './utils_today.js';
+import {refreshForecastHourlyHandle, refreshForecastWeeklyHandle, renderWeek} from './utils_week.js';
 
 
 
@@ -25,12 +24,7 @@ import {getTime, getLatlong, getWeatherData, renderTodayWeather, updateInfo, che
     
     document.addEventListener('click', (event)=> {
         if (event.target.id === 'btn-today') {
-            document.getElementById('btn-today').disabled = true;
-            document.getElementById('btn-week').disabled = false;
-            document.getElementById('big-div').innerHTML = `
-            <div class='main-cont' id='main-cont'></div>
-            <div class='img-cont' id='img-cont'></div>
-            <button class='refresh-btn' id='refresh-btn' >Refresh</button>`;
+            todayHandle();
             renderTodayWeather();
             getRenderImg();
             

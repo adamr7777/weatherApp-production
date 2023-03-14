@@ -1,19 +1,23 @@
+
+
+
 #for the private_version restore gps location <!--completed-->
+#rename fiveDaysForecast to 4 days <!--completed-->
+#split weatherForecast function into getForecastData and getForecastHtml <!--completed-->
+#remove functions that are not being used from imported lsist in app.js <!--completed-->
+#check height in diff mobile phones(res des) <!--completed-->
 #fix refresh circle
 #change scrimba api to regular
 #for all api calls add catch
-#split weatherForecast function into getForecastData and getForecastHtml <!--completed-->
 #change all data from lists to objects
-#get a better fortune cookie api
 #revrite the loop that appends fiveDaysForecastArray (in getWeatherForecastData() in utils.js) ??
-#remove functions that are not being used from imported list in app.js
-#check height in diff mobile phones(res des)
-#rename fiveDaysForecast to 4 days <!--completed-->
 
-next:
+tickets:
 
-#put the author on the pic
+#put the author on the pic <!--completed-->
 #get a better fortune cookie api
+
+#make an alternative layout for wider screens
 
 
 
@@ -39,4 +43,4 @@ next:
     top: 260px;
     right: 8px;
 
-    to aprox midnight to ?? - strange forecast for the week behaviour
+    from aprox midnight to ?? - strange forecast for the week behaviour
