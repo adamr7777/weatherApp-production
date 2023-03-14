@@ -1,5 +1,7 @@
 
-import {getTime, getLatlong, getWeatherData, renderTodayWeather, updateInfo, checkDay, getRenderImg, refreshWeatherHandle, renderWeek} from './utils.js';
+import {getTime, getLatlong, getWeatherData, renderTodayWeather, updateInfo, checkDay, 
+    getRenderImg, refreshWeatherHandle, renderWeek, refreshForecastHourlyHandle, 
+    refreshForecastWeeklyHandle} from './utils.js';
 
 
 
@@ -27,7 +29,8 @@ import {getTime, getLatlong, getWeatherData, renderTodayWeather, updateInfo, che
             document.getElementById('btn-week').disabled = false;
             document.getElementById('big-div').innerHTML = `
             <div class='main-cont' id='main-cont'></div>
-            <div class='img-cont' id='img-cont'></div>`;
+            <div class='img-cont' id='img-cont'></div>
+            <button class='refresh-btn' id='refresh-btn' >Refresh</button>`;
             renderTodayWeather();
             getRenderImg();
             
@@ -52,6 +55,10 @@ import {getTime, getLatlong, getWeatherData, renderTodayWeather, updateInfo, che
         
         
         if(event.target.id === 'weather-refresh') refreshWeatherHandle();
+
+        if (event.target.id === 'forecast-h-refresh') refreshForecastHourlyHandle();
+
+        if (event.target.id === 'forecast-d-refresh') refreshForecastWeeklyHandle()
         
     });
 
@@ -86,12 +93,54 @@ import {getTime, getLatlong, getWeatherData, renderTodayWeather, updateInfo, che
             }, 1000)
         }
 
+        if(event.target.id === 'forecast-h-refresh') {
+            mouseOver = true;
+
+            const refreshWeatherBtn = document.getElementById('forecast-h-refresh');
+            
+            refreshWeatherBtn.textContent = '↻';
+            
+            const refreshAnimation1 = setTimeout(()=> {            /*for pc setInterval()*/
+                if (mouseOver === false) clearInterval(refreshAnimation1)
+                refreshWeatherBtn.textContent = '⟳';
+            }, 500)
+        
+            const refreshAnimation2 = setTimeout(()=> {            /*for pc setInterval()*/
+                if (mouseOver === false) clearInterval(refreshAnimation2)
+                refreshWeatherBtn.textContent = '↻';
+            }, 1000)
+        }
+
+        if(event.target.id === 'forecast-d-refresh') {
+            mouseOver = true;
+
+            const refreshWeatherBtn = document.getElementById('forecast-d-refresh');
+            
+            refreshWeatherBtn.textContent = '↻';
+            
+            const refreshAnimation1 = setTimeout(()=> {            /*for pc setInterval()*/
+                if (mouseOver === false) clearInterval(refreshAnimation1)
+                refreshWeatherBtn.textContent = '⟳';
+            }, 500)
+        
+            const refreshAnimation2 = setTimeout(()=> {            /*for pc setInterval()*/
+                if (mouseOver === false) clearInterval(refreshAnimation2)
+                refreshWeatherBtn.textContent = '↻';
+            }, 1000)
+        }
+
         
 
     });
 
     document.addEventListener('mouseout', (event)=> {
-        if(event.target.id === 'weather-refresh') mouseOver = false
+        if(event.target.id === 'weather-refresh') mouseOver = false;
+
+        if(event.target.id === 'forecast-h-refresh') mouseOver = false;
+
+        if(event.target.id === 'forecast-d-refresh') mouseOver = false;
+
+        
     })
 })()
 

@@ -64,7 +64,7 @@ nav {
     justify-content: space-between; 
     align-items: center;
     min-height: 250px;
-    margin-top: 3em;
+    margin-top: 1.5em;            /*originally- 3em*/
 }
 
 
@@ -138,7 +138,7 @@ footer {
     /*top: 360px;
     left: 490px;*/        /*490px*/
     top: 260px;
-    right: 8px;;
+    right: 8px;
     color: white;
     /* all: unset; */
     background-color: #7d51b9;

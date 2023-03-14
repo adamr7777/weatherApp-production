@@ -26,3 +26,10 @@
         6 divs(each for a day) (monday, humidity, day/night icon, day/night temp)
         </div>
     </div>` --> height 608px a bit smaller
+
+
+    ref-btn 
+    top: 260px;
+    right: 8px;
+
+    to aprox midnight to ?? - strange forecast for the week behaviour
