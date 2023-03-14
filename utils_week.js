@@ -9,7 +9,7 @@ async function getQuote() {
     // let array = [];
     const response = await fetch(`http://yerkee.com/api/fortune`); 
     const data = await response.json();
-    console.log(data.fortune);
+    // console.log(data.fortune);
     // array.push({quote: data[0].quote, date: nowDate})
     // data[0].quote;
     // console.log(array);
@@ -18,7 +18,7 @@ async function getQuote() {
     
  
     
-    return 'something meaningful';
+    return data.fortune;
 }
 
 
