@@ -141,3 +141,15 @@ async function updateInfo() {
 
 
 
+// function doIt() {
+//     const API = 'asda';
+//     const x = fetch(API)
+//         .then((res)=> res.json())
+//         .then((data)=> {
+//             console.log(data);
+//             return data
+//         })
+//     return x;
+// }
+
+// const data = doIt();
