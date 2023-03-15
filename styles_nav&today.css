@@ -128,7 +128,7 @@ nav {
 
 footer {
     font-size: 13px;
-    margin-top: 1.6em;
+    margin-bottom: 1.6em;      /*1.6em*/
     width: 100%;
     text-align: right;
 }

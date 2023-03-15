@@ -11,11 +11,12 @@
 #for all api calls add catch
 #change all data from lists to objects
 #revrite the loop that appends fiveDaysForecastArray (in getWeatherForecastData() in utils.js) ??
+#ask chat gpt to write some more fortune cookies and and then update the array
 
 tickets:
 
 #put the author on the pic <!--completed-->
-#get a better fortune cookie api
+#get a better fortune cookie api <!--completed--> perhaps to add time functionality?
 
 #make an alternative layout for wider screens
 

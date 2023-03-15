@@ -1,24 +1,58 @@
 
 export {refreshForecastHourlyHandle, refreshForecastWeeklyHandle, renderWeek};
 import {getLatlong} from './utils_today.js'
+import {cookieArray} from './fortune_cookie_data.js'
 
 
-async function getQuote() {
+function getQuote() {
     // const now = new Date();
     // const nowDate = parseInt(`this is date:${now.getMonth()}${now.getDate()}`)
     // let array = [];
-    const response = await fetch(`http://yerkee.com/api/fortune`); 
-    const data = await response.json();
-    // console.log(data.fortune);
+    
     // array.push({quote: data[0].quote, date: nowDate})
-    // data[0].quote;
-    // console.log(array);
-   
-    // console.log(data);
+    
+//    0 - 29
+    let cookie;
+
+    if (localStorage.getItem('reducedCookieArray')) {
+        let reducedCookieArray = JSON.parse(localStorage.getItem('reducedCookieArray'));
+       
+        if (reducedCookieArray.length === 0) {
+            reducedCookieArray = JSON.parse(localStorage.getItem('originalCookieArray'))
+            const randomNum = Math.floor(Math.random() * reducedCookieArray.length);
+            cookie = reducedCookieArray.splice(randomNum, 1)[0];
+            localStorage.setItem('reducedCookieArray', JSON.stringify(reducedCookieArray));
+        }
+        else {
+            const randomNum = Math.floor(Math.random() * reducedCookieArray.length);
+            cookie = reducedCookieArray.splice(randomNum, 1)[0];
+            localStorage.setItem('reducedCookieArray', JSON.stringify(reducedCookieArray));
+        }
+        
+        
+    }
+
+    else {
+        localStorage.setItem('originalCookieArray', JSON.stringify(cookieArray));
+        const randomNum = Math.floor(Math.random() * cookieArray.length);
+        cookie = cookieArray.splice(randomNum, 1)[0];
+        localStorage.setItem('reducedCookieArray', JSON.stringify(cookieArray));
+    }
+
+    
+    // console.log(cookie);
+    // let array1 = [];
+    // const array2 = [1, 2, 3];
+    // array1 = array2;
+    // console.log(array1);
+
+    
+    
+    
     
  
     
-    return data.fortune;
+    return cookie;
 }
 
 
@@ -163,7 +197,7 @@ async function refreshForecastWeeklyHandle() {
 
 
 async function renderWeek() {
-    const quoteText = await getQuote();
+    const quoteText = getQuote();
     // console.log(quoteText);
     const forecastHourlyHtml = await getForecastHourlyHtml();
     const forecastWeeklyHtml = await getForecastWeeklyHtml();
