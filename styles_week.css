@@ -103,3 +103,21 @@
 .night-temp  {
     margin-left: 0.3125em;
 }
+
+
+
+
+/* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+
+@media (min-width: 1000px) {
+    .wrapper {
+    border: 3px solid white;
+    border-top-width: 0;
+    width: 75%;
+    height: 770px;
+    margin: 0 auto;
+    margin-top: 60px;
+    
+    }
+} 
+

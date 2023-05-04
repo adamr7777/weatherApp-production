@@ -11,7 +11,7 @@
 #for all api calls add catch
 #change all data from lists to objects
 #revrite the loop that appends fiveDaysForecastArray (in getWeatherForecastData() in utils.js) ??
-#ask chat gpt to write some more fortune cookies and and then update the array
+#ask chat gpt to write some more fortune cookies and and then update the array <!--completed-->
 
 tickets:
 
@@ -23,7 +23,7 @@ tickets:
 
 
 
-!!!! check the gap between 21:00 and 00:00
+!!!! check the gap between 21:00 and 00:00 <!--completed-->
 111 change the me units of all the divs to % to implement res des
 
 

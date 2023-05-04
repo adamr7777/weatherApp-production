@@ -2,13 +2,16 @@
 
 /* backgroound colors: #87CEEB, #800080, #9370DB medium purple is the way*/
 
+
+
+
+
 body {
     position: relative;
     background-color: #9370DB;
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
-    color: white;
-    /* box-sizing: border-box; */
+    color: white;  
 }
 
 
@@ -104,6 +107,8 @@ nav {
 
 .big-div {
     position: relative;
+    width: 450px;
+    margin: 0 auto;
 }
 
 .time {
@@ -128,7 +133,7 @@ nav {
 
 footer {
     font-size: 13px;
-    margin-bottom: 1.6em;      /*1.6em*/
+    margin-top: 1em;      
     width: 100%;
     text-align: right;
 }
@@ -196,9 +201,3 @@ footer {
 
   }
 
-/* @media(min-width: 600px) {
-    .big-div {
-        display: flex;
-        flex-direction: row;
-    }
-} */
