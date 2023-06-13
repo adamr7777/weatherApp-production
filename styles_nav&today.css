@@ -1,11 +1,5 @@
 
 
-/* backgroound colors: #87CEEB, #800080, #9370DB medium purple is the way*/
-
-
-
-
-
 body {
     position: relative;
     background-color: #9370DB;
@@ -39,7 +33,7 @@ nav {
     font-family: inherit;
     border: none;
     background-color: white;
-    color: #FF69B4;              /*#4169E1;*/
+    color: #FF69B4;              
     border-radius: 5px;
     font-weight: 700;
 }
@@ -67,7 +61,7 @@ nav {
     justify-content: space-between; 
     align-items: center;
     min-height: 250px;
-    margin-top: 0;            /*originally- 3em*/
+    margin-top: 0;            
 }
 
 
@@ -84,8 +78,7 @@ nav {
     margin-bottom: 1em;
     border-radius: 20px;
     padding: 1em 6em;
-    padding-bottom: 0.3em;
-    /* opacity: 0.5; */
+    padding-bottom: 0.3em; 
 }
 
 .weather-cont {
@@ -93,7 +86,6 @@ nav {
     justify-content: space-around;
     max-width: 100px;
     align-items: center;
-    /* flex-direction: row; */
 }
 
 .weather-img {
@@ -118,15 +110,11 @@ nav {
 
 
 .img-cont {
-    
-    /* min-height: 350px;
-    max-height: 350px; */
     height: 450px;
-    
 }
 
 .img {
-    width: 99.1%; /*98.6%*/
+    width: 99.1%; 
     height: 100%;
     border: 3px solid #7d51b9;
 }
@@ -140,15 +128,11 @@ footer {
 
 .refresh-btn {
     position: absolute;
-    /*top: 360px;
-    left: 490px;*/        /*490px*/
     top: 260px;
     right: 8px;
     color: white;
-    /* all: unset; */
     background-color: #7d51b9;
     border-radius: 20px;
-    /* border-color: none; */
 }
 
 .refresh-btn:hover {
@@ -197,7 +181,5 @@ footer {
     text-shadow: 1 1;
     font-size: 13px;
     margin: 0;
-    /* letter-spacing: 0.5px; */
-
   }
 

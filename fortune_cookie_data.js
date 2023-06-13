@@ -260,7 +260,7 @@ const cookieArray = [
     "Beware of a person who seems to be trying to undermine your authority or power.",
     "Be cautious of a situation that could lead to social isolation.",
     "Don't let your desire for material possessions blind you to what's really important in life.",
-]    
+];   
 
 
   

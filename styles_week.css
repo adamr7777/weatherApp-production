@@ -2,14 +2,12 @@
 
 
 .week-main-div {
-    /* border: 3px dotted red; */
     display: flex;
     flex-direction: column;
     justify-content: space-between; 
     align-items: center;
-    /* min-height: 250px; */
     margin-top: 2em;
-    height: 700px /*adjust this*/
+    height: 700px 
 }
 
 
@@ -21,7 +19,6 @@
     display: flex;
     flex-direction: column;
     padding: 0.5em;
-    /* align-items: center; */
 }
 
 
@@ -43,14 +40,12 @@
 .forecast-h-div {
     position: relative;
     display: flex;
-    /* box-sizing: border-box; */
     justify-content: space-around;
     align-items: center;
     background-color: #7d51b9;
     border-radius: 20px;
     padding: 1em 6em;
-    /* padding-bottom: 0.3em; */
-    max-width: 150px; /*100px*/
+    max-width: 150px; 
     max-height: 250px;
     letter-spacing: 0.05em;
 }
@@ -60,8 +55,6 @@
     display: flex;
     flex-direction: column;
     text-align: center;
-    
-    
 }
 
 .hourly-forecast-div h4 {
@@ -104,10 +97,6 @@
     margin-left: 0.3125em;
 }
 
-
-
-
-/* ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
 @media (min-width: 1000px) {
     .wrapper {

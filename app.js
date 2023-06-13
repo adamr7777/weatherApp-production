@@ -4,23 +4,10 @@ import {refreshForecastHourlyHandle, refreshForecastWeeklyHandle, renderWeek} fr
 
 
 
-// bring back the main 3 functions from utils.js 
-
-
-
-
-
-
-
-// console.log(checkDay());
-
 
 (function mainLoop() {
     const btnToday = document.getElementById('btn-today');
     btnToday.disabled = true;
-    // let isWeekActive = false;
-
- 
     
     document.addEventListener('click', (event)=> {
         if (event.target.id === 'btn-today') {
@@ -28,20 +15,14 @@ import {refreshForecastHourlyHandle, refreshForecastWeeklyHandle, renderWeek} fr
             renderTodayWeather();
             getRenderImg();
             
-            //original place for updateInfo()
-        }
+        };
 
         if (event.target.id === 'btn-week') {
-            
-            // document.getElementById('main-cont').innerHTML = `<h1>Coming soon!</h1>`
             document.getElementById('btn-today').disabled = false;
             document.getElementById('btn-week').disabled = true;
-            // isWeekActive = true;
-            // console.log(isWeekActive);
-            document.getElementById('big-div').innerHTML = `            
-            `;                                                          /*perhaps delete */
+            document.getElementById('big-div').innerHTML = ``;                                                          
             renderWeek();
-        }
+        };
 
       
 
@@ -52,13 +33,13 @@ import {refreshForecastHourlyHandle, refreshForecastWeeklyHandle, renderWeek} fr
 
         if (event.target.id === 'forecast-h-refresh') refreshForecastHourlyHandle();
 
-        if (event.target.id === 'forecast-d-refresh') refreshForecastWeeklyHandle()
+        if (event.target.id === 'forecast-d-refresh') refreshForecastWeeklyHandle();
         
     });
 
     
-        updateInfo(); /*move to the event listener */
-        renderTodayWeather();           /*for convenience, later delete*/
+        updateInfo(); 
+        renderTodayWeather();        
         getRenderImg();
 })();
 
@@ -76,16 +57,16 @@ import {refreshForecastHourlyHandle, refreshForecastWeeklyHandle, renderWeek} fr
             
             refreshWeatherBtn.textContent = '↻';
             
-            const refreshAnimation1 = setTimeout(()=> {            /*for pc setInterval()*/
+            const refreshAnimation1 = setTimeout(()=> {            
                 if (mouseOver === false) clearInterval(refreshAnimation1)
                 refreshWeatherBtn.textContent = '⟳';
             }, 500)
         
-            const refreshAnimation2 = setTimeout(()=> {            /*for pc setInterval()*/
+            const refreshAnimation2 = setTimeout(()=> {            
                 if (mouseOver === false) clearInterval(refreshAnimation2)
                 refreshWeatherBtn.textContent = '↻';
-            }, 1000)
-        }
+            }, 1000);
+        };
 
         if(event.target.id === 'forecast-h-refresh') {
             mouseOver = true;
@@ -94,16 +75,16 @@ import {refreshForecastHourlyHandle, refreshForecastWeeklyHandle, renderWeek} fr
             
             refreshWeatherBtn.textContent = '↻';
             
-            const refreshAnimation1 = setTimeout(()=> {            /*for pc setInterval()*/
+            const refreshAnimation1 = setTimeout(()=> {            
                 if (mouseOver === false) clearInterval(refreshAnimation1)
                 refreshWeatherBtn.textContent = '⟳';
-            }, 500)
+            }, 500);
         
-            const refreshAnimation2 = setTimeout(()=> {            /*for pc setInterval()*/
+            const refreshAnimation2 = setTimeout(()=> {        
                 if (mouseOver === false) clearInterval(refreshAnimation2)
                 refreshWeatherBtn.textContent = '↻';
-            }, 1000)
-        }
+            }, 1000);
+        };
 
         if(event.target.id === 'forecast-d-refresh') {
             mouseOver = true;
@@ -112,16 +93,16 @@ import {refreshForecastHourlyHandle, refreshForecastWeeklyHandle, renderWeek} fr
             
             refreshWeatherBtn.textContent = '↻';
             
-            const refreshAnimation1 = setTimeout(()=> {            /*for pc setInterval()*/
+            const refreshAnimation1 = setTimeout(()=> {            
                 if (mouseOver === false) clearInterval(refreshAnimation1)
                 refreshWeatherBtn.textContent = '⟳';
             }, 500)
         
-            const refreshAnimation2 = setTimeout(()=> {            /*for pc setInterval()*/
+            const refreshAnimation2 = setTimeout(()=> {       
                 if (mouseOver === false) clearInterval(refreshAnimation2)
                 refreshWeatherBtn.textContent = '↻';
-            }, 1000)
-        }
+            }, 1000);
+        };
 
         
 
@@ -135,8 +116,8 @@ import {refreshForecastHourlyHandle, refreshForecastWeeklyHandle, renderWeek} fr
         if(event.target.id === 'forecast-d-refresh') mouseOver = false;
 
         
-    })
-})()
+    });
+})();
 
 
 
@@ -152,4 +133,4 @@ import {refreshForecastHourlyHandle, refreshForecastWeeklyHandle, renderWeek} fr
 
 
 
-// getWeatherForecast();
+

@@ -5,13 +5,6 @@ import {cookieArray} from './fortune_cookie_data.js'
 
 
 function getQuote() {
-    // const now = new Date();
-    // const nowDate = parseInt(`this is date:${now.getMonth()}${now.getDate()}`)
-    // let array = [];
-    
-    // array.push({quote: data[0].quote, date: nowDate})
-    
-//    0 - 29
     let cookie;
 
     if (localStorage.getItem('reducedCookieArray')) {
@@ -39,21 +32,8 @@ function getQuote() {
         localStorage.setItem('reducedCookieArray', JSON.stringify(cookieArray));
     }
 
-    
-    // console.log(cookie);
-    // let array1 = [];
-    // const array2 = [1, 2, 3];
-    // array1 = array2;
-    // console.log(array1);
-
-    
-    
-    
-    
- 
-    
     return cookie;
-}
+};
 
 
 
@@ -61,43 +41,16 @@ async function getWeatherForecastData() {
     const location = getLatlong();   /*for the safe version remove await */
     const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${location[0]}&lon=${location[1]}&appid=df933d2878900bdaa697768d49d7372e&units=metric`)
     const data = await response.json();
-    // const nightForecast = data.list.filter((item)=> {
-    //     const time = item.dt_txt.slice(-8);
-    //     switch(time) {
-    //         case '00:00:00':
-    //             return
-    //     }
-          
-    // })
+    
     const nightForecast = data.list.filter((item)=> {
         const time = item.dt_txt.slice(-8);
-        return time === '00:00:00';
-         
-          
-    })
+        return time === '00:00:00';    
+    });
 
     const dayForecast = data.list.filter((item)=> {
         const time = item.dt_txt.slice(-8);
         return time === '12:00:00';
-    })
-
-    // console.log('fourDaysForecastArray:');
-    // console.log(nightForecast);
-
-    // const x = array.filter((num)=> {
-    //     if (num === 5) 
-    // })
-    
-    // const o = data.list.map((item)=> {
-    //     return item.dt_txt;
-    // })
-    
-    // console.log(o);
-    // console.log(`night forecast:`);
-    // console.log(nightForecast);
-    // console.log(`day forecast:`);
-    // console.log(dayForecast);
-    // console.log(data.list[0]);
+    });
 
     let fourDaysForecastArray = [];
     for(let night of nightForecast) {
@@ -108,19 +61,11 @@ async function getWeatherForecastData() {
                 const now = new Date();
                 const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
                 const tomorrowDate = now.getDate() + 1;
-                // const tomorrowDay = weekDays[now.getDay() + 1];
-                // console.log(tomorrowDate);
                 let index = tomorrowDate === parseInt(day.dt_txt.slice(8, 10))? 'Tomorrow': 
                     tomorrowDate === parseInt(day.dt_txt.slice(8, 10)) - 1? now.getDay() + 2:
                     tomorrowDate === parseInt(day.dt_txt.slice(8, 10)) - 2? now.getDay() + 3:
                     now.getDay() + 4;
                 
-                
-
-                
-                // if (num === 7) num = 0;
-                // if (num === 8) num = 1;
-                // if (num === 9) num = 2;
                 if (index > 6) index = index -7
                 
                 let dayOfWeek = weekDays[index];
@@ -136,21 +81,19 @@ async function getWeatherForecastData() {
                     nightDate: night.dt_txt,
                     humidity: day.main.humidity
                 });
-            }
-        }
-    }
+            };
+        };
+    };
     
-    // console.log(fourDaysForecastArray);
     if (fourDaysForecastArray.length > 4) fourDaysForecastArray.pop();
-    // console.log(fourDaysForecastArray);
+
     return {every3Hour: data.list.slice(0,3), fourDays: fourDaysForecastArray};
-}
+};
 
 
 
 async function getForecastHourlyHtml() {
     const weatherForecastObject = await getWeatherForecastData();
-    // console.log(weatherForecastObject);
     return weatherForecastObject.every3Hour.map((item)=> {
         return `
             <div class='hourly-forecast-div'>
@@ -158,14 +101,14 @@ async function getForecastHourlyHtml() {
                 <img src='http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png'/>
                 <h4>${Math.round(item.main.temp)}°</h4>
                 <h4>💧${item.main.humidity}%</h4>
-            </div>`
+            </div>
+        `
     }).join('');
-}
+};
 
 
 async function getForecastWeeklyHtml() {
-    const weatherForeCastObject = await getWeatherForecastData();
-    console.log(weatherForeCastObject.fourDays);                 /*important, check the date at all times */
+    const weatherForeCastObject = await getWeatherForecastData();               
     return weatherForeCastObject.fourDays.map((item)=> {
         return `
             <div class='day-div'>
@@ -207,10 +150,8 @@ async function refreshForecastWeeklyHandle() {
 
 async function renderWeek() {
     const quoteText = getQuote();
-    // console.log(quoteText);
     const forecastHourlyHtml = await getForecastHourlyHtml();
     const forecastWeeklyHtml = await getForecastWeeklyHtml();
-    // const ForecastWeeklyHtml
     document.getElementById('big-div')
         .innerHTML = `
         <div class='week-main-div' id='week-main-div'>
@@ -227,5 +168,5 @@ async function renderWeek() {
                 <button class='weather-refresh' id='forecast-d-refresh'>⟳</button>
             </div>
         </div>`
-}
+};
 
