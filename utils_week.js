@@ -38,56 +38,62 @@ function getQuote() {
 
 
 async function getWeatherForecastData() {
-    const location = getLatlong();   /*for the safe version remove await */
-    const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${location[0]}&lon=${location[1]}&appid=df933d2878900bdaa697768d49d7372e&units=metric`)
-    const data = await response.json();
+    try {
+        const location = await getLatlong();   /*for the safe version remove await */
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${location[0]}&lon=${location[1]}&appid=df933d2878900bdaa697768d49d7372e&units=metric`)
+        const data = await response.json();
+        
+        const nightForecast = data.list.filter((item)=> {
+            const time = item.dt_txt.slice(-8);
+            return time === '00:00:00';    
+        });
     
-    const nightForecast = data.list.filter((item)=> {
-        const time = item.dt_txt.slice(-8);
-        return time === '00:00:00';    
-    });
-
-    const dayForecast = data.list.filter((item)=> {
-        const time = item.dt_txt.slice(-8);
-        return time === '12:00:00';
-    });
-
-    let fourDaysForecastArray = [];
-    for(let night of nightForecast) {
-        for(let day of dayForecast) {
-            if (night.dt_txt.slice(0, 10) === day.dt_txt.slice(0, 10)) {
-                const dayIcon = day.weather[0].icon;
-                const nightIcon = night.weather[0].icon;
-                const now = new Date();
-                const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-                const tomorrowDate = now.getDate() + 1;
-                let index = tomorrowDate === parseInt(day.dt_txt.slice(8, 10))? 'Tomorrow': 
-                    tomorrowDate === parseInt(day.dt_txt.slice(8, 10)) - 1? now.getDay() + 2:
-                    tomorrowDate === parseInt(day.dt_txt.slice(8, 10)) - 2? now.getDay() + 3:
-                    now.getDay() + 4;
-                
-                if (index > 6) index = index -7
-                
-                let dayOfWeek = weekDays[index];
-                if (index=== 'Tomorrow') dayOfWeek = 'Tomorrow';
-
-                fourDaysForecastArray.push({
-                    dayTemp: day.main.temp, 
-                    nightTemp: night.main.temp, 
-                    dayIcon: dayIcon, 
-                    nightIcon: nightIcon, 
-                    dayDate: day.dt_txt, 
-                    weekDay: dayOfWeek,
-                    nightDate: night.dt_txt,
-                    humidity: day.main.humidity
-                });
+        const dayForecast = data.list.filter((item)=> {
+            const time = item.dt_txt.slice(-8);
+            return time === '12:00:00';
+        });
+    
+        let fourDaysForecastArray = [];
+        for(let night of nightForecast) {
+            for(let day of dayForecast) {
+                if (night.dt_txt.slice(0, 10) === day.dt_txt.slice(0, 10)) {
+                    const dayIcon = day.weather[0].icon;
+                    const nightIcon = night.weather[0].icon;
+                    const now = new Date();
+                    const weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                    const tomorrowDate = now.getDate() + 1;
+                    let index = tomorrowDate === parseInt(day.dt_txt.slice(8, 10))? 'Tomorrow': 
+                        tomorrowDate === parseInt(day.dt_txt.slice(8, 10)) - 1? now.getDay() + 2:
+                        tomorrowDate === parseInt(day.dt_txt.slice(8, 10)) - 2? now.getDay() + 3:
+                        now.getDay() + 4;
+                    
+                    if (index > 6) index = index -7
+                    
+                    let dayOfWeek = weekDays[index];
+                    if (index=== 'Tomorrow') dayOfWeek = 'Tomorrow';
+    
+                    fourDaysForecastArray.push({
+                        dayTemp: day.main.temp, 
+                        nightTemp: night.main.temp, 
+                        dayIcon: dayIcon, 
+                        nightIcon: nightIcon, 
+                        dayDate: day.dt_txt, 
+                        weekDay: dayOfWeek,
+                        nightDate: night.dt_txt,
+                        humidity: day.main.humidity
+                    });
+                };
             };
         };
-    };
+        
+        if (fourDaysForecastArray.length > 4) fourDaysForecastArray.pop();
     
-    if (fourDaysForecastArray.length > 4) fourDaysForecastArray.pop();
+        return {every3Hour: data.list.slice(0,3), fourDays: fourDaysForecastArray};
+    }
 
-    return {every3Hour: data.list.slice(0,3), fourDays: fourDaysForecastArray};
+    catch(error) {
+        alert(`An error occured: ${error}`);
+    }
 };
 
 

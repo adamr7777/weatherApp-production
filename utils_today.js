@@ -22,24 +22,36 @@ function checkDay() {
 
 
 
-/*async*/ function getLatlong() {     
-    // const position = await new Promise((resolve, reject)=> {                /*comment all out, remove async  */
-    //     navigator.geolocation.getCurrentPosition(resolve,reject)
-    // });
-    // return [position.coords.latitude, position.coords.longitude];       
-    return [51.50722, -0.1275]                   /*for the safe version */
+async function getLatlong() {   
+    try {
+        const position = await new Promise((resolve, reject)=> {         /*comment all out, remove async to get version2 */
+            navigator.geolocation.getCurrentPosition(resolve,reject)
+        });
+        return [position.coords.latitude, position.coords.longitude];       
+        // return [51.50722, -0.1275]                   /*for the version without gps */
+    }  
+
+    catch(error) {
+        alert(`An error occured: ${error}`);
+    }
 }
 
 
 
 async function getWeatherData() {
-    const location = /*await*/ getLatlong();  /*fro the safe version remove await */
-   
-    const response = await fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${location[0]}&lon=${location[1]}&units=metric`);
-    const data = await response.json();         /*catch error */
-    const iconString = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
-    return [Math.round(data.main.temp), iconString, data.name, data.weather[0].description];
-}
+    try {
+        const location = await getLatlong();  /*fro the version without GPS remove await */
+       
+        const response = await fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${location[0]}&lon=${location[1]}&units=metric`);
+        const data = await response.json();         
+        const iconString = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+        return [Math.round(data.main.temp), iconString, data.name, data.weather[0].description];
+    }
+
+    catch(error) {
+        alert(`An error occured: ${error}`);
+    }
+};
 
 
 async function renderTodayWeather() {
@@ -63,17 +75,22 @@ async function renderTodayWeather() {
 
 
 async function getRenderImg() {
-    const api = 'https://api.unsplash.com/'  
-    const weatherData = await getWeatherData();
-    const timeOfDay = checkDay();
-    const randomImg = `https://api.unsplash.com/photos/random/`        
-    const key = '&client_id=XYMe11wvf2H6WeG3VzMj5QFbkZlplD0WCK2BCYPGIfI'
-    const topic = `?query=${weatherData[3]},${timeOfDay},nature&orientation=portrait`
-    const response = await fetch(randomImg + topic + key);
-    const data = await response.json();
-    
-    document.getElementById('img-cont').innerHTML = `<img class='img' src='${data.urls.regular}'/>`
-    document.getElementById('author-pic').textContent = `by ${data.user.first_name} ${data.user.last_name}`
+    try {
+        const weatherData = await getWeatherData();
+        const timeOfDay = checkDay();
+        const randomImg = `https://api.unsplash.com/photos/random/`        
+        const key = '&client_id=XYMe11wvf2H6WeG3VzMj5QFbkZlplD0WCK2BCYPGIfI'
+        const topic = `?query=${weatherData[3]},${timeOfDay},nature&orientation=portrait`
+        const response = await fetch(randomImg + topic + key);
+        const data = await response.json();
+        
+        document.getElementById('img-cont').innerHTML = `<img class='img' src='${data.urls.regular}'/>`
+        document.getElementById('author-pic').textContent = `by ${data.user.first_name} ${data.user.last_name}`
+    } 
+
+    catch {
+        alert(`An error occured: ${error}`);
+    }
 };
 
 
