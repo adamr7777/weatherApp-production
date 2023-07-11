@@ -39,8 +39,9 @@ function getQuote() {
 
 async function getWeatherForecastData() {
     try {
+        const API_URL = 'https://api.openweathermap.org/data/2.5/';
         const location = await getLatlong();   
-        const response = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${location[0]}&lon=${location[1]}&appid=df933d2878900bdaa697768d49d7372e&units=metric`)
+        const response = await fetch(`${API_URL }forecast?lat=${location[0]}&lon=${location[1]}&appid=df933d2878900bdaa697768d49d7372e&units=metric`)
         const data = await response.json();
         
         const nightForecast = data.list.filter((item)=> {

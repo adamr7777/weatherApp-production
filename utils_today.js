@@ -39,9 +39,9 @@ async function getLatlong() {
 
 async function getWeatherData() {
     try {
+        const WEATHER_API_URL = 'https://api.openweathermap.org/data/2.5/';
         const location = await getLatlong();  
-       
-        const response = await fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${location[0]}&lon=${location[1]}&units=metric`);
+        const response = await fetch(`${WEATHER_API_URL}weather?lat=${location[0]}&lon=${location[1]}&appid=df933d2878900bdaa697768d49d7372e&units=metric`);
         const data = await response.json();         
         const iconString = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
         return [Math.round(data.main.temp), iconString, data.name, data.weather[0].description];
@@ -75,6 +75,7 @@ async function renderTodayWeather() {
 
 async function getRenderImg() {
     try {
+        const UNSPLASH_API_KEY = import.meta.env.UNSPLASH_API_KEY;      /*check this */
         const weatherData = await getWeatherData();
         const timeOfDay = checkDay();
         const randomImg = `https://api.unsplash.com/photos/random/`        
