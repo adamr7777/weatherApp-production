@@ -47,7 +47,7 @@ async function getWeatherForecastData() {
         const nightForecast = data.list.filter((item)=> {
             const time = item.dt_txt.slice(-8);
             return time === '00:00:00';    
-        });x
+        });
     
         const dayForecast = data.list.filter((item)=> {
             const time = item.dt_txt.slice(-8);
