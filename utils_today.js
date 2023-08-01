@@ -75,17 +75,16 @@ async function renderTodayWeather() {
 
 async function getRenderImg() {
     try {
-        const UNSPLASH_API_KEY = import.meta.env.UNSPLASH_API_KEY;      /*check this */
         const weatherData = await getWeatherData();
         const timeOfDay = checkDay();
-        const randomImg = `https://api.unsplash.com/photos/random/`        
+        const randomImg = 'https://api.unsplash.com/photos/random/';      
         const key = '&client_id=XYMe11wvf2H6WeG3VzMj5QFbkZlplD0WCK2BCYPGIfI'
-        const topic = `?query=${weatherData[3]},${timeOfDay},nature&orientation=portrait`
+        const topic = `?query=${weatherData[3]},${timeOfDay},nature&orientation=portrait`;
         const response = await fetch(randomImg + topic + key);
         const data = await response.json();
         
-        document.getElementById('img-cont').innerHTML = `<img class='img' src='${data.urls.regular}'/>`
-        document.getElementById('author-pic').textContent = `by ${data.user.first_name} ${data.user.last_name}`
+        document.getElementById('img-cont').innerHTML = `<img class='img' src='${data.urls.regular}'/>`;
+        document.getElementById('author-pic').textContent = `by ${data.user.first_name} ${data.user.last_name}`;
     } 
 
     catch {
