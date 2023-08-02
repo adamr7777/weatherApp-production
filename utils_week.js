@@ -37,19 +37,28 @@ function getQuote() {
 
 
 
-async function getWeatherForecastData() {
+async function getWeatherForecastData() {       //API///////////////////////////////////
     try {
-        const API_URL = 'https://api.openweathermap.org/data/2.5/';
+        const devUrl = 'http://localhost:5000/api/weather-forecast'; //url for dev
         const location = await getLatlong();   
-        const response = await fetch(`${API_URL }forecast?lat=${location[0]}&lon=${location[1]}&appid=df933d2878900bdaa697768d49d7372e&units=metric`)
-        const data = await response.json();
-        
-        const nightForecast = data.list.filter((item)=> {
+        const backendApiForecast = 'https://weatherapp-backend-cdsz.onrender.com/api/weather-forecast'; //change it when the backend will go air
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({lat: location[0], lon: location[1]})
+        };
+
+        const res = await fetch(backendApiForecast, options); 
+        const data = await res.json();
+    
+        const nightForecast = data.data.list.filter((item)=> {
             const time = item.dt_txt.slice(-8);
             return time === '00:00:00';    
         });
     
-        const dayForecast = data.list.filter((item)=> {
+        const dayForecast = data.data.list.filter((item)=> {
             const time = item.dt_txt.slice(-8);
             return time === '12:00:00';
         });
@@ -89,7 +98,7 @@ async function getWeatherForecastData() {
         
         if (fourDaysForecastArray.length > 4) fourDaysForecastArray.pop();
     
-        return {every3Hour: data.list.slice(0,3), fourDays: fourDaysForecastArray};
+        return {every3Hour: data.data.list.slice(0,3), fourDays: fourDaysForecastArray};
     }
 
     catch(error) {

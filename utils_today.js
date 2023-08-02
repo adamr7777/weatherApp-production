@@ -37,14 +37,23 @@ async function getLatlong() {
 
 
 
-async function getWeatherData() {
+async function getWeatherData() {   //API///////////////////////////////////
     try {
-        const WEATHER_API_URL = 'https://api.openweathermap.org/data/2.5/';
         const location = await getLatlong();  
-        const response = await fetch(`${WEATHER_API_URL}weather?lat=${location[0]}&lon=${location[1]}&appid=df933d2878900bdaa697768d49d7372e&units=metric`);
-        const data = await response.json();         
-        const iconString = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
-        return [Math.round(data.main.temp), iconString, data.name, data.weather[0].description];
+        const devUrl = 'http://localhost:5000/api/weather-today'; //url for dev
+        const backendApiWeatherToday = 'https://weatherapp-backend-cdsz.onrender.com/api/weather-today'; //change it when the backend will go air
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({lat: location[0], lon: location[1]})
+        };
+
+        const res = await fetch(backendApiWeatherToday, options); 
+        const data = await res.json();      
+        const iconString = `http://openweathermap.org/img/wn/${data.data.weather[0].icon}@2x.png`
+        return [Math.round(data.data.main.temp), iconString, data.data.name, data.data.weather[0].description];
     }
 
     catch(error) {
@@ -73,18 +82,24 @@ async function renderTodayWeather() {
 }
 
 
-async function getRenderImg() {
+async function getRenderImg() {     //API///////////////////////////////////
     try {
         const weatherData = await getWeatherData();
         const timeOfDay = checkDay();
-        const randomImg = 'https://api.unsplash.com/photos/random/';      
-        const key = '&client_id=XYMe11wvf2H6WeG3VzMj5QFbkZlplD0WCK2BCYPGIfI'
-        const topic = `?query=${weatherData[3]},${timeOfDay},nature&orientation=portrait`;
-        const response = await fetch(randomImg + topic + key);
-        const data = await response.json();
+        const backendApiImgUrl = 'http://localhost:5000/api/random-image' //change it when backend goes live
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({timeOfDay, weather: weatherData[3]})
+        };
+
+        const res = await fetch(backendApiImgUrl, options);
+        const data = await res.json();
         
-        document.getElementById('img-cont').innerHTML = `<img class='img' src='${data.urls.regular}'/>`;
-        document.getElementById('author-pic').textContent = `by ${data.user.first_name} ${data.user.last_name}`;
+        document.getElementById('img-cont').innerHTML = `<img class='img' src='${data.data.urls.regular}'/>`;
+        document.getElementById('author-pic').textContent = `by ${data.data.user.first_name} ${data.data.user.last_name}`;
     } 
 
     catch {
