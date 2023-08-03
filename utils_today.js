@@ -41,7 +41,7 @@ async function getWeatherData() {   //API///////////////////////////////////
     try {
         const location = await getLatlong();  
         const devUrl = 'http://localhost:5000/api/weather-today'; //url for dev
-        const backendApiWeatherToday = 'https://weatherapp-backend-cdsz.onrender.com/api/weather-today'; //change it when the backend will go air
+        const backendApiWeatherToday = 'https://weatherapp-backend-cdsz.onrender.com/api/weather-today'; 
         const options = {
             method: 'POST',
             headers: {
@@ -86,13 +86,15 @@ async function getRenderImg() {     //API///////////////////////////////////
     try {
         const weatherData = await getWeatherData();
         const timeOfDay = checkDay();
-        const backendApiImgUrl = 'http://localhost:5000/api/random-image' //change it when backend goes live
+        const devUrl = 'https:/localhost:5000/api/random-image'; //url for dev
+        const backendApiImgUrl = 'https:/weatherapp-backend-cdsz.onrender.com/api/random-image'; 
+        const weather = weatherData[3];
         const options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({timeOfDay, weather: weatherData[3]})
+            body: JSON.stringify({timeOfDay, weather})
         };
 
         const res = await fetch(backendApiImgUrl, options);
@@ -102,7 +104,7 @@ async function getRenderImg() {     //API///////////////////////////////////
         document.getElementById('author-pic').textContent = `by ${data.data.user.first_name} ${data.data.user.last_name}`;
     } 
 
-    catch {
+    catch(error) {
         alert(`An error occured: ${error}`);
     }
 };

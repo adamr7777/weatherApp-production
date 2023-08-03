@@ -41,7 +41,7 @@ async function getWeatherForecastData() {       //API///////////////////////////
     try {
         const devUrl = 'http://localhost:5000/api/weather-forecast'; //url for dev
         const location = await getLatlong();   
-        const backendApiForecast = 'https://weatherapp-backend-cdsz.onrender.com/api/weather-forecast'; //change it when the backend will go air
+        const backendApiForecast = 'https://weatherapp-backend-cdsz.onrender.com/api/weather-forecast'; 
         const options = {
             method: 'POST',
             headers: {
