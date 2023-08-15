@@ -101,7 +101,7 @@ async function getRenderImg() {     //API///////////////////////////////////
         // const data = await res.json();
         
         const RANDOM_IMG_API = 'https://api.unsplash.com/photos/random/';      
-        const RANDOM_IMG_KEY = 'XYMe11wvf2H6WeG3VzMj5QFbkZlplD0WCK2BCYPGIfI';;
+        const RANDOM_IMG_KEY = 'XYMe11wvf2H6WeG3VzMj5QFbkZlplD0WCK2BCYPGIfI';
         const weather = weatherData[3];
         const randomImgEndpoint = `?query=${weather},${timeOfDay},nature&orientation=portrait&client_id=${RANDOM_IMG_KEY}`;
     

@@ -6,7 +6,7 @@ import {getLatlong} from './utils_today.js'
 async function getQuote() {
 
     const data = await getCookieArray();
-    const cookieArray =  data.data;
+    const cookieArray = data.data;
     
     let cookie;
 
@@ -42,11 +42,15 @@ async function getQuote() {
 
 
 async function getCookieArray() {               //API///////////////////////////////////
-    const devUrl = 'http://localhost:5000/api/fortune-cookies';
-    const fortuneCookiesApi = 'https://weatherapp-backend-cdsz.onrender.com/api/fortune-cookies';
-    const response = await fetch(fortuneCookiesApi);
-    const data = await response.json();
-    return data;
+    try {
+        const devUrl = 'http://localhost:5000/api/fortune-cookies';
+        const fortuneCookiesApi = 'https://weatherapp-backend-cdsz.onrender.com/api/fortune-cookies';
+        const response = await fetch(fortuneCookiesApi);
+        const data = await response.json();
+        return data;
+    } catch(err) {
+        console.error(err);
+    };
 };
 
 
