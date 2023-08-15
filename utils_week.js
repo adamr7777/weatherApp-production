@@ -1,10 +1,13 @@
 
 export {refreshForecastHourlyHandle, refreshForecastWeeklyHandle, renderWeek};
 import {getLatlong} from './utils_today.js'
-import {cookieArray} from './fortune_cookie_data.js'
 
 
-function getQuote() {
+async function getQuote() {
+
+    const data = await getCookieArray();
+    const cookieArray =  data.data;
+    
     let cookie;
 
     if (localStorage.getItem('reducedCookieArray')) {
@@ -35,6 +38,16 @@ function getQuote() {
     return cookie;
 };
 
+
+
+
+async function getCookieArray() {               //API///////////////////////////////////
+    const devUrl = 'http://localhost:5000/api/fortune-cookies';
+    const fortuneCookiesApi = 'https://weatherapp-backend-cdsz.onrender.com/api/fortune-cookies';
+    const response = await fetch(fortuneCookiesApi);
+    const data = await response.json();
+    return data;
+};
 
 
 async function getWeatherForecastData() {       //API///////////////////////////////////
@@ -165,7 +178,7 @@ async function refreshForecastWeeklyHandle() {
 
 
 async function renderWeek() {
-    const quoteText = getQuote();
+    const quoteText = await getQuote();
     const forecastHourlyHtml = await getForecastHourlyHtml();
     const forecastWeeklyHtml = await getForecastWeeklyHtml();
     document.getElementById('big-div')

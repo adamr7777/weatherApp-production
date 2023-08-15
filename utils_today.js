@@ -86,22 +86,32 @@ async function getRenderImg() {     //API///////////////////////////////////
     try {
         const weatherData = await getWeatherData();
         const timeOfDay = checkDay();
-        const devUrl = 'https:/localhost:5000/api/random-image'; //url for dev
-        const backendApiImgUrl = 'https:/weatherapp-backend-cdsz.onrender.com/api/random-image'; 
-        const weather = weatherData[3];
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({timeOfDay, weather})
-        };
+        // const devUrl = 'https:/localhost:5000/api/random-image'; //url for dev
+        // const backendApiImgUrl = 'https:/weatherapp-backend-cdsz.onrender.com/api/random-image'; 
+        // const weather = weatherData[3];
+        // const options = {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json'
+        //     },
+        //     body: JSON.stringify({timeOfDay, weather})
+        // };
 
-        const res = await fetch(backendApiImgUrl, options);
-        const data = await res.json();
+        // const res = await fetch(backendApiImgUrl, options);
+        // const data = await res.json();
         
-        document.getElementById('img-cont').innerHTML = `<img class='img' src='${data.data.urls.regular}'/>`;
-        document.getElementById('author-pic').textContent = `by ${data.data.user.first_name} ${data.data.user.last_name}`;
+        const RANDOM_IMG_API = 'https://api.unsplash.com/photos/random/';      
+        const RANDOM_IMG_KEY = 'XYMe11wvf2H6WeG3VzMj5QFbkZlplD0WCK2BCYPGIfI';;
+        const weather = weatherData[3];
+        const randomImgEndpoint = `?query=${weather},${timeOfDay},nature&orientation=portrait&client_id=${RANDOM_IMG_KEY}`;
+    
+        const res = await fetch(RANDOM_IMG_API + randomImgEndpoint);
+        const data = await res.json();
+            
+
+        
+        document.getElementById('img-cont').innerHTML = `<img class='img' src='${data.urls.regular}'/>`;
+        document.getElementById('author-pic').textContent = `by ${data.user.first_name} ${data.user.last_name}`;
     } 
 
     catch(error) {
