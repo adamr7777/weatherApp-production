@@ -1,35 +1,76 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>WeatherApp</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel='stylesheet' href='styles_nav&today.css'/>
-        <link rel='stylesheet' href='styles_week.css'/>
+        <title>My portfolio</title>
+        <!-- google fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;0,900;1,300&display=swap" rel="stylesheet">
+        <!-- font awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" 
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" 
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- css -->
+        <link rel='stylesheet' href='styles.css'/>
+        <!-- responsive design -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
         <header>
             <nav>
-                <h4 class='logo'>WeatherApp</h4>
-                <ul class='nav-ul'>
-                    <li><button class='btn-nav' id='btn-today'>Today</button></li>
-                    <li><button class='btn-nav' id='btn-week'>For the Week</button></li>
-                </ul>
+                <a href='index.html'>               
+                    <div class='logo'>
+                        <h2 id='web-dev-h2'>Web Dev</h2>
+                        <i class="fa-solid fa-umbrella"></i>
+                    </div>
+                </a>
+                <div class='nav-options hidden' id='nav-options'>
+                    <div class='works-div' id='works-div'>
+                        <p id='works-btn' class='works-btn nav-item'>works</p>
+                    </div>
+                    <p id='about-me-btn' class='about-me-btn nav-item'>about me</p>
+                    <a target='_blank' href='https://www.linkedin.com/in/adam-r-562618263/'>
+                        <i class="fa-brands fa-linkedin nav-item"></i>
+                    </a>
+                    <a target='_blank' href='https://github.com/adamr7777'><i class="fa-brands fa-github nav-item"></i></a>
+                </div>
             </nav>
         </header>
-        <div class='wrapper'>
-            <main class='big-div' id='big-div'>
-                <div class='main-cont' id='main-cont'></div>
-                <div class='img-cont' id='img-cont'></div>
-                <button class='refresh-btn' id='refresh-btn' >Refresh</button>
-                <p class='author-pic' id='author-pic'></p>
-            </main>
+        <main>
+            <section>
+                <div class='main-container'>
+                    <div class='introduction hidden' id='introduction'>
+                        <h1 class='welcome intro-cont'>Welcome</h1>
+                        <article>
+                            <div>
+                                <h3 class='intro-text intro-cont'>
+                                    I am a passionate and dedicated developer with a penchant for creating 
+                                    innovative and engaging websites. Here, you will find a selection 
+                                    of my best work, showcasing my technical abilities and creative problem-solving skills. 
+                                </h3>
+                                <h3 class='intro-text intro-cont'>
+                                    I am always striving to improve and expand my skill set. 
+                                    Take a look and let's create something amazing together.
+                                </h3>
+                            </div>
+                        </article>
+                    </div>
+                    <div class='orn'>
+                        <img src='images/orn.gif' alt='some cool moving ornamentation'/>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <footer></footer>
+        <div class='outer-email'>
+            <div id='email-modal' class='email-modal hidden-email-modal'>
+                <button class='email-modal-content hidden close-btn' id='close-btn'>X</button>
+                <h2 class='email-modal-content hidden'>Contact me at:</h2>
+                <h4 class='email-modal-content hidden' id='email-h4'>adam.r_@outlook.com</h4>
+                <p class='email-modal-content hidden info-p' id='info-p'>Copy to the clipboard</p>
+            </div>
+            <i class="fa-solid fa-envelope hidden" id='email-icon'></i>
         </div>
-        <footer>
-            <p>Made by Adomas</p>
-        </footer>
-        <script src='app.js' type='module'></script>
+        <script type='module' src='app.js'></script>
     </body>
 </html>

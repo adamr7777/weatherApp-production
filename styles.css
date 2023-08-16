@@ -1,0 +1,295 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #080808;
+    color: silver;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+
+.nav-options {
+    display: flex;                     
+    align-items: center;
+    justify-content: space-between;
+    
+    width: 500px;
+    margin-right: 100px;
+    color: #a17917;
+}
+
+
+
+
+.nav-item:hover,
+.nav-item:focus,
+.logo:hover,
+.logo:focus {
+    color: red;
+    text-shadow: 1px 1px 5px red;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+
+.about-me-btn-changed {
+    margin-left: 163.2px;
+}
+
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 50px;
+    color: #a17917; 
+}
+
+.logo i {
+    margin-left: 7px;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+    margin: 0 180px;
+    margin-top: 50px;
+    height: 700px;
+    background: #080808; 
+}
+
+.introduction {                            
+    border-left: 3px solid #a17917;
+    border-bottom: 3px solid #a17917;
+    margin-right: 400px;
+    margin-top: 100px;
+    padding-left: 30px;
+}
+
+.introduction > h3 {
+    width: 249.38px;
+}
+
+
+.orn img {
+    width: 750px;
+}
+
+.welcome {
+    font-weight: 500;
+    font-size: 60px;
+}
+
+.intro-text {
+    font-weight: 300;
+}
+
+
+.web-dev-red {
+    color: red;
+    text-shadow: 1px 1px 5px red;
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+
+
+
+.fa-envelope {
+    position: fixed;
+    bottom: 45px;
+    right: 45px;
+    color: #a17917;
+    font-size: 52px;
+    transition: opacity 2.5s ease-in; 
+    opacity: 0.5;
+    
+}
+
+
+.fa-envelope:hover,
+.fa-envelope:focus  {
+    opacity: 1;
+    color: red;
+    font-size: 60px;
+    cursor: pointer;
+    text-shadow: 1px 1px 5px red;
+}
+
+
+.email-modal {                 
+    position: fixed;
+    background: #080808;
+    opacity: 0.80;
+    border: 3px solid #a17917;
+    width: 0px;
+    height: 0px;
+    bottom: 47px;
+    right: 40px;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.email-modal h2 {
+    margin-top: 50px;
+} 
+
+
+.email-modal p {
+    margin-top: 80px;
+} 
+
+
+
+.hidden {
+    opacity: 0;
+    transition: opacity 0.5s ease-in; 
+}
+
+.visible {
+    transition: opacity 2.5s ease-in; 
+    opacity: 1;
+}
+
+.hidden-email-icon {
+    display: none;
+}
+
+.hidden-email-modal {
+    display: none;
+}
+
+.visible-email-modal {
+    display: flex;
+}
+
+
+.info-p:hover,
+.info-p:focus,
+.close-btn:hover, 
+.close-btn:focus,
+.projects:hover,
+.projects:focus {
+    color: red;
+    cursor: pointer;
+    text-shadow: 1px 1px 5px red;
+}
+
+
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 6px;
+    border: none;
+    background: none;
+    color: inherit;
+
+}
+
+
+.first-item-aboutme {
+    margin-top: 100px;
+}
+
+
+.first-item-aboutme, 
+.second-item-aboutme,
+.about-me-stack {
+    font-weight: 300;
+}
+
+
+.about-me-stack li {
+    margin-top: 50px;       /*this is where to work with stack li*/
+    list-style: none;
+}
+
+.about-me-stack li::before {
+    content: '\2022';  
+    color: red; 
+    text-shadow: 1px 1px 5px red;
+    font-weight: bold; 
+    display: inline-block; 
+    width: 1em; 
+    margin-left: -1em; 
+  }
+
+
+.works-clicked {  
+    position: relative;
+    display: flex;
+    position: absolute;
+    border-top: 3px solid #a17917;
+    border-bottom: 3px solid #a17917;         
+    width: 670px; /*this is where to change size according to the number of works*/
+    top: 8px;
+    left: 300px;            /*this is where to change position according to the number of works*/
+              
+  }
+  
+
+.projects {
+    margin-left: 50px;
+    color: silver;
+  }
+
+
+  .works-text-upper {
+    margin-top: 150px;
+  }
+ 
+
+  .works-text {
+    
+    font-weight: 300;
+  }
+
+
+  .password-link {
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 50px;
+  }
+
+  .password-link:hover,
+  .password-link:focus {
+    color: red; 
+    text-shadow: 1px 1px 5px red;
+  }
+
+  .link-span {
+    color: red; 
+    text-shadow: 1px 1px 5px red;
+  }
+
+  .close-btn-works {
+    position: absolute;
+    top: 4px;
+    right: 0px;
+    border: none;
+    background: none;
+    color: silver;
+
+}
+
+.hidden-x {
+    display: none;
+}
+
+
+
